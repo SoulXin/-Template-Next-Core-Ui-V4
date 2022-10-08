@@ -1,7 +1,7 @@
 <p align="center">
     <a href="https://laravel.com/docs/master/starter-kits">
         <img src="/art/breeze.svg" alt="Logo Next Js">
-        <h1 align="center">Next.js</h1>
+        <h1 align="center">Laravel Breeze</h1>
     </a>
 </p>
 
