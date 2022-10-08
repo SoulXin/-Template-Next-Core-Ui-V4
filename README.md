@@ -1,5 +1,4 @@
 <p align="center">
-<img src="/art/breeze.svg" alt="Logo Laravel Breeze">
 <img src="/art/next.svg" alt="Logo Next Js">
 </p>
 
