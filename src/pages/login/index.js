@@ -12,7 +12,7 @@ import { useAuth } from '../../hooks/auth'
 const Login = () => {
   const router = useRouter()
 
-  const { login } = useAuth({
+  const { user, login } = useAuth({
     middleware: 'guest',
     redirectIfAuthenticated: '/dashboard',
   });
@@ -32,65 +32,67 @@ const Login = () => {
 
   const submitForm = async event => {
     event.preventDefault()
-
     login({ email, password, setErrors, setStatus })
   }
 
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center dark:bg-transparent">
-      <Container>
-        <Row className="justify-content-center align-items-center px-3">
-          <Col lg={8}>
-            <Row>
-              <Col md={7} className="bg-white border p-5 mx-auto">
-                  <h1>Login</h1>
-                  <p className="text-black-50">Sign In to your account</p>
+      {
+        !user &&
+        <Container>
+          <Row className="justify-content-center align-items-center px-3">
+            <Col lg={8}>
+              <Row>
+                <Col md={7} className="bg-white border p-5 mx-auto">
+                    <h1>Login</h1>
+                    <p className="text-black-50">Sign In to your account</p>
 
-                  <Form onSubmit={submitForm}>
-                    <InputGroup className="mb-3">
-                      <InputGroup.Text>
-                        <FontAwesomeIcon
-                          icon={faUser}
-                          fixedWidth
+                    <Form onSubmit={submitForm}>
+                      <InputGroup className="mb-3">
+                        <InputGroup.Text>
+                          <FontAwesomeIcon
+                            icon={faUser}
+                            fixedWidth
+                          />
+                        </InputGroup.Text>
+                        <Form.Control
+                          name="email"
+                          required
+                          placeholder="Email"
+                          aria-label="Email"
+                          onChange={event => setEmail(event.target.value)}
                         />
-                      </InputGroup.Text>
-                      <Form.Control
-                        name="email"
-                        required
-                        placeholder="Email"
-                        aria-label="Email"
-                        onChange={event => setEmail(event.target.value)}
-                      />
-                    </InputGroup>
+                      </InputGroup>
 
-                    <InputGroup className="mb-3">
-                      <InputGroup.Text>
-                        <FontAwesomeIcon
-                          icon={faLock}
-                          fixedWidth
+                      <InputGroup className="mb-3">
+                        <InputGroup.Text>
+                          <FontAwesomeIcon
+                            icon={faLock}
+                            fixedWidth
+                          />
+                        </InputGroup.Text>
+                        <Form.Control
+                          type="password"
+                          name="password"
+                          required
+                          placeholder="Password"
+                          aria-label="Password"
+                          onChange={event => setPassword(event.target.value)}
                         />
-                      </InputGroup.Text>
-                      <Form.Control
-                        type="password"
-                        name="password"
-                        required
-                        placeholder="Password"
-                        aria-label="Password"
-                        onChange={event => setPassword(event.target.value)}
-                      />
-                    </InputGroup>
+                      </InputGroup>
 
-                    <Row>
-                      <Col xs={6}>
-                        <Button className="px-4" variant="primary" type="submit">Login</Button>
-                      </Col>
-                    </Row>
-                  </Form>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </Container>
+                      <Row>
+                        <Col xs={6}>
+                          <Button className="px-4" variant="primary" type="submit">Login</Button>
+                        </Col>
+                      </Row>
+                    </Form>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </Container>
+      }
     </div>
   )
 }

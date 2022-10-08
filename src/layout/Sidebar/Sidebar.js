@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import { Button } from 'react-bootstrap'
 import SidebarNav from './SidebarNav'
+import { faImage, faUser } from '@fortawesome/free-regular-svg-icons'
 
 const Sidebar = (props) => {
   const { isShow, isShowMd } = props
@@ -32,7 +33,7 @@ const Sidebar = (props) => {
       id="sidebar"
     >
       <div className="sidebar-brand d-none d-md-flex align-items-center justify-content-center">
-        <h1>Admin</h1>
+        <FontAwesomeIcon icon={faImage} />
       </div>
 
       <div className="sidebar-nav flex-fill">

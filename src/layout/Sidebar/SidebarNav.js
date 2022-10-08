@@ -113,7 +113,7 @@ const SidebarNavGroup = (props) => {
 const SidebarNav = () => {
   return (
     <ul className="list-unstyled">
-      <SidebarNavItem icon={faGauge} href="/">
+      <SidebarNavItem icon={faGauge} href="/dashboard">
         Dashboard
       </SidebarNavItem>
 

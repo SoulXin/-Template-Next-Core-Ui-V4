@@ -7,6 +7,11 @@ import { SSRProvider } from 'react-bootstrap'
 import { Provider } from 'react-redux'
 import store from '../redux/Store'
 import 'datatables.net-bs5'
+import { useAuth } from '../hooks/auth';
+import { useRouter } from 'next/router'
+import Login from './login';
+import { useEffect } from 'react';
+import NextNProgress from "nextjs-progressbar";
 
 // You change this configuration value to false so that the Font Awesome core SVG library
 // will not try and insert <style> elements into the <head> of the page.
@@ -15,11 +20,36 @@ import 'datatables.net-bs5'
 config.autoAddCss = false
 
 function MyApp({ Component, pageProps }) {
+  const { user, isLoading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    router.replace(router.pathname, undefined, { shallow: true })
+  }, [user]);
+
+
+  function AuthLogin() {
+    useEffect(() => {
+      router.replace('/login', undefined, { shallow: true })
+    }, [])
+    return <Login />
+  }
+
   return <SSRProvider>
-    <Provider store={store}>
-      <Component {...pageProps} />
-    </Provider>
-  </SSRProvider>
+      <NextNProgress 
+        color='#0071e2'
+      />
+      {
+        isLoading ? <div class="loader"></div> : 
+        pageProps.auth && !user ? (
+          <AuthLogin/>
+        ) : (
+          <Provider store={store}>
+            <Component {...pageProps} />
+          </Provider>
+        )
+      }
+    </SSRProvider>
 }
 
 export default MyApp

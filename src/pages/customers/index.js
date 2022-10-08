@@ -102,4 +102,12 @@ class Index extends Component {
   }
 }
 
+export async function getStaticProps() {
+  return {
+    props: {
+      auth: true
+    },
+  }
+}
+
 export default Index

@@ -1,20 +1,9 @@
 import { Layout } from '../layout'
 import { connect } from 'react-redux';
 import { set_login_action } from '../redux/utils/Action';
-import { useEffect } from 'react';
 import Head from 'next/head'
 
-const Home = (props) => {
-  const {login} = props;
-  
-  useEffect(() => {
-    if(localStorage.getItem('token')){
-      props.set_login_action(true);
-    }else {
-      props.set_login_action(false);
-    }
-  }, []);
-  
+const Home = () => {
   return (
     <Layout>
       <Head>
@@ -41,6 +30,14 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     set_login_action: (data) => dispatch(set_login_action(data)),
+  }
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      auth: true
+    },
   }
 }
 
